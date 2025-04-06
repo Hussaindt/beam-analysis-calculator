@@ -31,13 +31,9 @@ document.getElementById('prediction-form').addEventListener('submit', async func
         const data = await response.json();
         
         if (data.success) {
-            // Update results
+            // Update only elastic modulus result
             document.getElementById('elastic-modulus-result').textContent = 
                 `${data.elastic_modulus} N/mm²`;
-            document.getElementById('load-result').textContent = 
-                `${data.load} N`;
-            document.getElementById('deflection-result').textContent = 
-                `${data.deflection} mm`;
             
             // Show results section
             document.getElementById('results').style.display = 'block';

@@ -25,26 +25,12 @@ def predict():
         depth = float(data['depth'])
         length = float(data['length'])
         
-        # Make prediction for elastic modulus
+        # Make prediction for elastic modulus only
         predicted_E = predict_elastic_modulus(concrete_mix, breadth, depth, length)
-        
-        # Calculate moment of inertia
-        I = (breadth * depth**3) / 12
-        
-        # Predict load at first crack (this is a simplified example - you should use your actual model)
-        # For now, we'll use a simple relationship based on concrete strength and beam geometry
-        # You should replace this with your actual load prediction model
-        load_at_first_crack = (concrete_mix * breadth * depth**2) / (6 * length)  # Simplified example
-        
-        # Calculate deflection at first crack
-        deflection = (5/384) * (load_at_first_crack * length**4 / (predicted_E * I)) + \
-                    (23/648) * (load_at_first_crack * length**3 / (predicted_E * I))
         
         return jsonify({
             'success': True,
-            'elastic_modulus': f"{predicted_E:.2f}",
-            'load': f"{load_at_first_crack:.2f}",
-            'deflection': f"{deflection:.6f}"
+            'elastic_modulus': f"{predicted_E:.2f}"
         })
         
     except Exception as e:
